@@ -3,20 +3,20 @@
 const mysql = require("mysql");
 const express = require("express");
 const path = require("path");
-const PORT = 8080;
+const PORT = 5000;
 const bodyParser = require("body-parser");
 
 let conn = mysql.createConnection({
   host: "127.0.0.1",
   user: "root",
   password: "greenfox",
-  database: "urlAliaserDb"
+  database: "foxplayer"
 });
 
 conn.connect(function(err) {
   if (err) {
     console.log("Error connecting to Db");
-    console.log(err);
+    // console.log(err);
     return;
   }
   console.log("Connection to database established\n");

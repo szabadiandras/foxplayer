@@ -1,26 +1,60 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+
 #player {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  }
-  
-  .playlist { grid-area: 1 / 1 / 5 / 3; }
-  .tracks { grid-area: 1 / 3 / 5 / 5; }
-  .control { grid-area: 5 / 1 / 6 / 5; }
+  width: 1400px;
+  padding: 50px;
+}
 
 .playlist {
-  border: 3px solid red;
-  height: 600px;
+  grid-area: 1 / 1 / 5 / 3;
 }
 
 .tracks {
-  border: 3px solid blue;
-  height: 600px;
+  grid-area: 1 / 3 / 5 / 5;
 }
 
 .control {
-  border: 3px solid lawngreen;
+  grid-area: 5 / 1 / 6 / 5;
+}
+
+/* PLAYLIST */
+
+.playlist {
+  display: grid;
+  flex-direction: row;
+  border: 3px solid red;
+  height: 750px;
+}
+
+.logo {
+  border: 3px solid red;
   height: 100px;
+  width: flex 2;
+}
+
+.artwork {
+  border: 3px solid red;
+  height: 100px;
+}
+
+/* TRACKS */
+
+.tracks {
+  border: 3px solid blue;
+  height: 750px;
+}
+
+/* CONTROL PANEL */
+
+.control {
+  border: 3px solid lawngreen;
+  height: 150px;
 }

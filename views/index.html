@@ -22,18 +22,29 @@
     <aside class="tracks">
       <div class="current"></div>
     </aside>
-    
+
     <footer class="control">
-      <div class="buttons">
+      <div class="navigation">
         <div class="rewind"></div>
-        <div class="pause"></div>
+        <div class="playstate"></div>
         <div class="forward"></div>
       </div>
-      <div class="seeker"></div>
-      <div class="volume"></div>
+
+      <div class="duration">
+          <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+      </div>
+
+      <div class="preferences">
+        <div class="shuffle"></div>
+        <div class="volume"></div>
+        <div class="seeker">
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        </div>
+      </div>
     </footer>
 
   </article>
+  <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

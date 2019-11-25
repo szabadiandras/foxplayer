@@ -1,18 +1,7 @@
-h1 {
-  background-color: black;
-  color: aqua;
-  border: 1px solid red;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
+#player {
+  display: grid;
+  width: 1000px;
+  height: 700px;
 
-div {
-  background-color: black;
-  color: aqua;
-  border: 1px solid red;
-}
-
-body {
-  background-color: black;
-  color: aqua;
-  border: 1px solid red;
+  border: 2px solid red;
 }

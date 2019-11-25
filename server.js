@@ -24,7 +24,8 @@ conn.connect(function(err) {
 
 let app = express();
 app.use(express.json());
-app.use(express.static("./views"));
+app.use('/assets', express.static('assets'));
+//app.use(express.static("./views"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // END OF REQs & CONNs

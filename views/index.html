@@ -15,7 +15,13 @@
   <article id="player" class="player">
 
     <main class="playlist">
-      <div class="logo"></div>
+      <div class="left">
+        <div class="logo"></div>
+        <div class="labels">
+          <h1 class="playlistLabel">Playlist</h1>
+          <div class="add">+</div>
+        </div>
+      </div>
       <div class="artwork"></div>
     </main>
 
@@ -25,20 +31,20 @@
 
     <footer class="control">
       <div class="navigation">
-        <div class="rewind"></div>
-        <div class="playstate"></div>
-        <div class="forward"></div>
+        <button class="rewind"></button>
+        <button class="playstate"></button>
+        <button class="forward"></button>
       </div>
 
       <div class="duration">
-          <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
       </div>
 
       <div class="preferences">
-        <div class="shuffle"></div>
-        <div class="volume"></div>
+        <button class="shuffle"></button>
+        <button class="volume"></button>
         <div class="seeker">
-            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+          <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
         </div>
       </div>
     </footer>

@@ -38,6 +38,26 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "./views/index.html"));
 });
 
+
+// GET PLAYLIST-TRACKS
+
+app.get("/playlist-tracks", (req, res) => {
+  const query = "SELECT * FROM tracks";
+  conn.query(query, (err, posts) => {
+    res.setHeader("Content-type", "application/json");
+    res.status(200);
+    res.send(JSON.stringify(posts));
+    console.log('Client request: "Get Playlist-Tracks".');
+  });
+});
+
+// GET PLAYLISTS
+
+app.get("/", function(req, res) {
+  res.sendFile(path.join(__dirname, "./views/index.html"));
+});
+
+
 // PORT
 
 app.listen(PORT, () => {

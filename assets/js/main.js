@@ -9,6 +9,7 @@ playstate.addEventListener("click", function(e) {
     playstate.className = "paused";
     playstate.classList.add("pause");
     playstate.classList.remove("play");
+    
   } else {
     playstate.className = "play";
     playstate.classList.add("play");
@@ -28,10 +29,10 @@ volume.addEventListener("click", function(e) {
     volume.classList.remove("loud");
     volumeslider.disabled = true;
     volumeslider.classList.add("disable");
+
   } else {
     volume.className = "loud";
     volume.classList.add("loud");
-    volume.classList.remove("paused");
     volumeslider.disabled = false;
     volumeslider.classList.remove("disable");
   }

@@ -19,32 +19,42 @@
         <div class="logo"></div>
         <div class="labels">
           <h1 class="playlistLabel">Playlist</h1>
-          <div class="add">+</div>
+          <button class="add">+</button>
         </div>
       </div>
       <div class="artwork"></div>
     </main>
+    <div class="mainPlaylist"></div>
 
     <aside class="tracks">
       <div class="current"></div>
+      <div class="tracklabels">
+        <button class="add">+</button>
+        <button class="favorite"></button>
+      </div>
     </aside>
+    <div class="mainTracks">
+      <div class="track"></div>
+    </div>
 
     <footer class="control">
       <div class="navigation">
         <button class="rewind"></button>
-        <button class="playstate"></button>
+        <button class="playstate play"></button>
         <button class="forward"></button>
       </div>
 
       <div class="duration">
+        <div class="start">1:23</div>
         <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+        <div class="end">4:56</div>
       </div>
 
       <div class="preferences">
         <button class="shuffle"></button>
-        <button class="volume"></button>
+        <button class="volume loud"></button>
         <div class="seeker">
-          <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+          <input role="progressbar" type="range" min="1" max="100" value="50" class="slider" id="volumeSlider">
         </div>
       </div>
     </footer>

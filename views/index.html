@@ -24,11 +24,12 @@
           <div id="myModal" class="modal">
             <div class="modal-content">
               <span class="close">&times;</span>
-              <form action="">
+              <form>
                 <h1>Create a new playlist</h1>
                 <label for="newpl"></label>
-                <input type="text" name="newpl" id="newpl" required>
+                <input type="newpl" name="newpl" id="newpl" required>
                 <button class="createButton" type="button">Create Playlist</button>
+                <div id="alert"></div>
               </form>
             </div>
           </div>
@@ -37,7 +38,9 @@
       </div>
       <div class="artwork"></div>
     </main>
-    <div class="mainPlaylist"></div>
+    <div class="mainPlaylist">
+      <div class="lists"></div>
+    </div>
 
     <aside class="tracks">
       <div class="current">

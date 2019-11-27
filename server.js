@@ -5,6 +5,7 @@ const express = require("express");
 const path = require("path");
 const PORT = 5000;
 const bodyParser = require("body-parser");
+const jsonParser = bodyParser.json();
 
 let conn = mysql.createConnection({
   host: "127.0.0.1",
@@ -57,6 +58,40 @@ app.get("/playlists", function(req, res) {
     res.status(200);
     res.send(JSON.stringify(data));
     console.log('Client request: "Get Playlists database".');
+  });
+});
+
+// POST TO PLAYLIST
+
+app.post("/playlists", jsonParser, function(req, res) {
+  let newTitle = req.body.playlist;
+  console.log(req.body);
+  let query = `INSERT INTO playlists (playlist) VALUES (?);`;
+  conn.query(query, [newTitle], (err, data) => {
+    console.log(data);
+    query = `SELECT * FROM playlists WHERE id=(SELECT MAX(id) FROM playlists);`;
+    conn.query(query, (err, data) => {
+      res.status(200);
+      res.send(JSON.stringify(data));
+    });
+  });
+});
+
+// DELETE PLAYLIST
+
+app.delete("/playlists/:id/remove", function(req, res) {
+  const query = `DELETE FROM foxplayer.playlists WHERE id = ${req.params.id}`;
+  conn.query(query, (err, del) => {
+    console.log("Checking for errors: " + err);
+    const query = `SELECT * FROM playlists WHERE id=${req.params.id}`;
+    conn.query(query, (err, del) => {
+      res.setHeader("Content-type", "application/json");
+      res.status(200);
+      res.send(JSON.stringify(del));
+      console.log(
+        `Client request: "Delete playlist with id: '${req.params.id}' from database".`
+      );
+    });
   });
 });
 

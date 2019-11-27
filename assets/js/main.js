@@ -1,11 +1,56 @@
 "use strict";
 
+let index = new XMLHttpRequest();
+index.open("GET", "http://localhost:5000/playlists", true);
+let lists = document.querySelector(".lists");
+
+// GENERATE PLAYLISTS
+
+index.onload = function() {
+  let response = JSON.parse(index.responseText);
+  for (let i = 0; i < response.length; i++) {
+    let generatedpl = document.createElement("div");
+    let removepl = document.createElement("button");
+
+    generatedpl.classList.add("generatedpl");
+    removepl.classList.add("removepl");
+    removepl.setAttribute("value", "remove");
+    removepl.setAttribute("id", response[i].id);
+    generatedpl.innerText = response[i].playlist;
+
+    lists.appendChild(generatedpl);
+    generatedpl.appendChild(removepl);
+  }
+};
+
+index.send();
+
+// LISTENING TO KEYPRESS
+
 let playstate = document.querySelector(".playstate");
 let audio = document.querySelector("audio");
 
+document.body.onkeyup = function(e) {
+  if (e.keyCode == 32) {
+    console.log("space pressed");
+    if (playstate.className.match("play")) {
+      playstate.className = "paused";
+      playstate.classList.add("pause");
+      playstate.classList.remove("play");
+      audio.play();
+    } else {
+      playstate.className = "play";
+      playstate.classList.add("play");
+      playstate.classList.remove("paused");
+      audio.pause();
+    }
+  }
+};
+
+// LISTENING TO CLICK
+
 playstate.addEventListener("click", function(e) {
   console.log("Play/Pause button clicked.");
-
   if (playstate.className.match("play")) {
     playstate.className = "paused";
     playstate.classList.add("pause");
@@ -18,6 +63,8 @@ playstate.addEventListener("click", function(e) {
     audio.pause();
   }
 });
+
+// LISTENING TO CLICK ON VOLUME
 
 let volume = document.querySelector(".volume");
 let volumeslider = document.querySelector("#volumeSlider");
@@ -34,10 +81,34 @@ volume.addEventListener("click", function(e) {
   } else {
     volume.className = "loud";
     volume.classList.add("loud");
-    í;
     volumeslider.disabled = false;
     volumeslider.classList.remove("disable");
   }
+});
+
+// POST TO PLAYLIST
+
+let createButton = document.querySelector(".createButton");
+let alert = document.querySelector("#alert");
+
+createButton.addEventListener("click", function() {
+  let title = document.getElementById("newpl");
+  let fetchSettings = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      playlist: title.value
+    }),
+    mode: "cors"
+  };
+  console.log(fetchSettings);
+  fetch("http://localhost:5000/playlists", fetchSettings)
+    .then(response => response.json())
+    .then(
+      mydata =>
+        (alert.innerHTML = `Your new playlist called <strong>${mydata[0].playlist}</strong> has been created!`)
+    )
+    .catch(error => console.log(error));
 });
 
 // TESTING MODAL
@@ -58,28 +129,12 @@ window.onclick = function(event) {
   }
 };
 
-// CREATE NEW PLAYLIST
+// DELETE PLAYLIST
 
-let createButton = document.querySelector(".createButton");
-
-createButton.addEventListener("click", function() {
-  let title = document.getElementById("newpl");
-  let fetchSettings = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      title: 
-      
-    }),
-    mode: "cors"
-  };
-  console.log(fetchSettings);
-  fetch("http://localhost:8080/api/links", fetchSettings)
-    .then(response => response.json())
-    .then(mydata =>
-      (div.innerHTML = `Your URL is aliased to <strong>${mydata[0].alias}</strong> and your secret code is <strong>${mydata[0].secretCode}</strong>.`)(
-        (div.innerHTML = `<style="color:red;">Your alias is already in use!</style>`)
-      )
-    )
-    .catch(error => console.log(error));
-});
+removepl.addEventListener("click", function(e) {
+  newRequest.open('DELETE', `http://localhost:8080/posts/${postID}/remove`, true);
+  console.log(newRequest.responseText);
+  console.log(event);
+  console.log(`Post with postID:${postID} has been deleted`);
+  newRequest.send();
+}

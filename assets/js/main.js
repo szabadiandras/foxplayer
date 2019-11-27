@@ -130,11 +130,3 @@ window.onclick = function(event) {
 };
 
 // DELETE PLAYLIST
-
-removepl.addEventListener("click", function(e) {
-  newRequest.open('DELETE', `http://localhost:8080/posts/${postID}/remove`, true);
-  console.log(newRequest.responseText);
-  console.log(event);
-  console.log(`Post with postID:${postID} has been deleted`);
-  newRequest.send();
-}

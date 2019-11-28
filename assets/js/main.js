@@ -3,23 +3,40 @@
 let index = new XMLHttpRequest();
 index.open("GET", "http://localhost:5000/playlists", true);
 let lists = document.querySelector(".lists");
+let track = document.querySelector(".track");
 
 // GENERATE PLAYLISTS
 
 index.onload = function() {
   let response = JSON.parse(index.responseText);
+
   for (let i = 0; i < response.length; i++) {
     let generatedpl = document.createElement("div");
     let removepl = document.createElement("button");
+    //let numtr = document.createElement("p");
 
     generatedpl.classList.add("generatedpl");
     removepl.classList.add("removepl");
+    // numtr.classList.add("numtr");
+
     removepl.setAttribute("value", "remove");
     removepl.setAttribute("id", response[i].id);
     generatedpl.innerText = response[i].playlist;
+    // numtr.innerText = i;
 
     lists.appendChild(generatedpl);
     generatedpl.appendChild(removepl);
+    // generatedtr.appendChild(numtr);
+  }
+
+  for (let i = 0; i < response.length; i++) {
+    console.log(response);
+    let generatedtr = document.createElement("div");
+    generatedtr.classList.add("generatedtr");
+    generatedtr.innerHTML = `<strong>${[i + 1]}</strong> ... ${
+      response[i].trackname
+    }`;
+    track.appendChild(generatedtr);
   }
 };
 
@@ -70,7 +87,7 @@ let volume = document.querySelector(".volume");
 let volumeslider = document.querySelector("#volumeSlider");
 
 volume.addEventListener("click", function(e) {
-  console.log("Volume button clicked.");
+  console.log("Mute button clicked.");
 
   if (volume.className.match("loud")) {
     volume.className = "muted";
@@ -130,3 +147,23 @@ window.onclick = function(event) {
 };
 
 // DELETE PLAYLIST
+
+let request = new XMLHttpRequest();
+let body = document.querySelector("body");
+body.addEventListener("click", function(e) {
+  let id = event.target.id;
+  let action = event.target.value;
+  let response = JSON.parse(index.responseText);
+  if (id !== undefined && action == "remove") {
+    request.open(
+      "DELETE",
+      `http://localhost:5000/playlists/${id}/remove`,
+      true
+    );
+    console.log("id: " + id);
+    console.log("action: " + action);
+    console.log(event);
+    console.log(response);
+    request.send();
+  }
+});

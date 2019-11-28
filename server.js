@@ -52,7 +52,8 @@ app.get("/playlist-tracks", (req, res) => {
 // GET PLAYLISTS
 
 app.get("/playlists", function(req, res) {
-  const query = "SELECT * FROM playlists";
+  //const query = "SELECT * FROM playlists;";
+  const query = "SELECT * FROM playlists;"; //LEFT JOIN tracks ON playlists.id=tracks.playlist_id;";
   conn.query(query, (err, data) => {
     res.setHeader("Content-type", "application/json");
     res.status(200);

@@ -78,6 +78,29 @@ app.post("/playlists", jsonParser, function(req, res) {
   });
 });
 
+// POST TO TRACK
+
+app.post("/playlist-tracks", jsonParser, function(req, res) {
+  let newTrack = req.body.trackname;
+  let newPath = req.body.path;
+  console.log(req.body);
+  let query = `INSERT INTO tracks (trackname, path) VALUES (?,?);`;
+  conn.query(query, [newTrack, newPath], (err, data) => {
+    if (err) {
+      console.log(err.toString());
+      res.status(500).send("Database error");
+      return;
+    } else {
+      console.log(data);
+      query = `SELECT * FROM tracks WHERE id=(SELECT MAX(id) FROM tracks);`;
+      conn.query(query, (err, data) => {
+        res.status(200);
+        res.send(JSON.stringify(data));
+      });
+    }
+  });
+});
+
 // DELETE PLAYLIST
 
 app.delete("/playlists/:id/remove", function(req, res) {

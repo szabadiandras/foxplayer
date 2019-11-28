@@ -43,7 +43,7 @@ index2.onload = function() {
     removetr.classList.add("removetr");
     removetr.setAttribute("value", "remove");
     removetr.setAttribute("id", response[i].id);
-    generatedtr.innerText = response[i].trackname;
+    generatedtr.innerText = [i+1] + ' - ' + response[i].trackname;
     console.log(response[i].trackname);
     track2.appendChild(generatedtr);
     generatedtr.appendChild(removetr);
@@ -137,6 +137,32 @@ createButton.addEventListener("click", function() {
     .catch(error => console.log(error));
 });
 
+// POST TO TRACKS
+
+let createButton2 = document.querySelector(".createButton2");
+
+createButton2.addEventListener("click", function() {
+  let trackname = document.getElementById("newtr");
+  let path = document.getElementById("newpth");
+  let fetchSettings = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      trackname: trackname.value,
+      path: path.value
+    }),
+    mode: "cors"
+  };
+  console.log(fetchSettings);
+  fetch("http://localhost:5000/playlist-tracks", fetchSettings)
+    .then(response => response.json())
+    .then(
+      mydata =>
+        (alert.innerHTML = `Your new track called <strong>${mydata[0].trackname}</strong> has been added!`)
+    )
+    .catch(error => console.log(error));
+});
+
 // TESTING MODAL
 
 var modal = document.getElementById("myModal");
@@ -155,6 +181,25 @@ window.onclick = function(event) {
   }
 };
 
+// TESTING MODAL FOR ADDING SONG
+
+var modal2 = document.getElementById("myModal2");
+var btn2 = document.getElementById("myBtn2");
+var span2 = document.getElementsByClassName("close2")[0];
+
+btn2.onclick = function() {
+  modal2.style.display = "block";
+};
+span2.onclick = function() {
+  modal2.style.display = "none";
+};
+window.onclick = function(event) {
+  if (event.target == modal2) {
+    modal2.style.display = "none";
+  }
+};
+
+
 // DELETE PLAYLIST
 
 let request = new XMLHttpRequest();
@@ -166,7 +211,7 @@ body.addEventListener("click", function(e) {
   if (id !== undefined && action == "remove") {
     request.open(
       "DELETE",
-      `http://localhost:5000/playlists/${id}/Xremove`,
+      `http://localhost:5000/playlists/${id}/remove`,
       true
     );
     console.log("id from response" + response.system);

@@ -3,7 +3,6 @@
 let index = new XMLHttpRequest();
 index.open("GET", "http://localhost:5000/playlists", true);
 let lists = document.querySelector(".lists");
-let track = document.querySelector(".track");
 
 // GENERATE PLAYLISTS
 
@@ -13,34 +12,44 @@ index.onload = function() {
   for (let i = 0; i < response.length; i++) {
     let generatedpl = document.createElement("div");
     let removepl = document.createElement("button");
-    //let numtr = document.createElement("p");
 
     generatedpl.classList.add("generatedpl");
     removepl.classList.add("removepl");
-    // numtr.classList.add("numtr");
 
     removepl.setAttribute("value", "remove");
     removepl.setAttribute("id", response[i].id);
     generatedpl.innerText = response[i].playlist;
-    // numtr.innerText = i;
 
     lists.appendChild(generatedpl);
     generatedpl.appendChild(removepl);
-    // generatedtr.appendChild(numtr);
-  }
-
-  for (let i = 0; i < response.length; i++) {
-    console.log(response);
-    let generatedtr = document.createElement("div");
-    generatedtr.classList.add("generatedtr");
-    generatedtr.innerHTML = `<strong>${[i + 1]}</strong> ... ${
-      response[i].trackname
-    }`;
-    track.appendChild(generatedtr);
   }
 };
-
 index.send();
+
+
+// GENERATE TRACKS
+
+let index2 = new XMLHttpRequest();
+index2.open("GET", "http://localhost:5000/playlist-tracks", true);
+let track2 = document.querySelector(".track");
+
+index2.onload = function() {
+  let response = JSON.parse(index2.responseText);
+  console.log("second for loop " + response);
+  for (let i = 0; i < response.length; i++) {
+    let generatedtr = document.createElement("div");
+    let removetr = document.createElement("button");
+    generatedtr.classList.add("generatedtr");
+    removetr.classList.add("removetr");
+    removetr.setAttribute("value", "remove");
+    removetr.setAttribute("id", response[i].id);
+    generatedtr.innerText = response[i].trackname;
+    console.log(response[i].trackname);
+    track2.appendChild(generatedtr);
+    generatedtr.appendChild(removetr);
+  }
+};
+index2.send();
 
 // LISTENING TO KEYPRESS
 

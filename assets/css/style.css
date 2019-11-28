@@ -465,7 +465,7 @@ input {
   float: right;
 }
 
-.generatedpl:hover + .removepl {
+.generatedpl:hover+.removepl {
   display: inline;
 }
 
@@ -474,7 +474,6 @@ input {
 }
 
 /* ADD TRACKS */
-
 
 .modal2 {
   display: none;

@@ -157,9 +157,10 @@ body.addEventListener("click", function(e) {
   if (id !== undefined && action == "remove") {
     request.open(
       "DELETE",
-      `http://localhost:5000/playlists/${id}/remove`,
+      `http://localhost:5000/playlists/${id}/Xremove`,
       true
     );
+    console.log("id from response" + response.system);
     console.log("id: " + id);
     console.log("action: " + action);
     console.log(event);

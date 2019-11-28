@@ -116,7 +116,7 @@ body {
   margin: 0;
 }
 
-.favorite:active{
+.favorite:active {
   filter: brightness(50%);
 }
 
@@ -464,11 +464,10 @@ input {
   float: right;
 }
 
+.generatedpl:hover + .removepl {
+  display: inline;
+}
+
 .generatedpl:hover+.removepl {
   border: 2px solid orange;
 }
-
-/*
-.numtr {
-}
-*/
